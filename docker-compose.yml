@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  # Your PHP-FPM Application
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: php_app
+    restart: unless-stopped
+    working_dir: /var/www
+    # Optional: If you want to bind-mount your local code for development, uncomment the next line
+    # volumes:
+    #   - .:/var/www
+
+  # Nginx Web Server / Reverse Proxy
+  web:
+    image: nginx:alpine
+    container_name: nginx_web
+    restart: unless-stopped
+    ports:
+      - "8000:80" # Maps port 8000 on your local machine to port 80 in Nginx
+    volumes:
+      # Mount the Nginx configuration file
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      # Nginx needs access to your static files to serve them directly
+      - .:/var/www:ro 
+    depends_on:
+      - app
