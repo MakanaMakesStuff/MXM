@@ -14,7 +14,6 @@ services:
       - laravel-storage-production:/var/www/storage:ro
     networks:
       - laravel-production
-      - dokploy-network
     ports:
       # Map port 80 inside the container to the port specified by 'NGINX_PORT' on the host machine.
       # -----------------------------------------------------------
@@ -117,8 +116,7 @@ networks:
   # -----------------------------------------------------------
   laravel-production:
     driver: bridge
-  dokploy-network:
-    driver: bridge
+
 volumes:
   postgres-data-production:
   laravel-storage-production:

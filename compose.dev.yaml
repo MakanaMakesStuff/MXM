@@ -70,7 +70,6 @@ services:
       - ./:/var/www
     networks:
       - laravel-development
-      - dokploy-network
     command: >
       /bin/bash -c "
       composer install && 
@@ -100,9 +99,6 @@ services:
 
 networks:
   laravel-development:
-    driver: bridge
-  dokploy-network:
-    driver: bridge
 
 volumes:
   postgres-data-development:
