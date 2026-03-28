@@ -81,7 +81,7 @@ RUN echo 'export NVM_DIR="$HOME/.nvm"' >> /home/www/.bashrc && \
 WORKDIR /var/www
 
 # Override the entrypoint to avoid the default php entrypoint
-ENTRYPOINT ["/usr/local/bin/workspace-entrypoint.sh"]
+ENTRYPOINT []
 
 # Default command to keep the container running
-CMD ["npm", "run", "dev", "--", "--host"]
+CMD ["composer", "install", "&&", "npm", "install", "&&", "npm", "run", "dev", "--", "--host"]
