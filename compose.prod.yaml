@@ -116,9 +116,9 @@ networks:
   # For example, 'php-fpm' can connect to 'postgres' by using 'postgres' as the hostname.
   # -----------------------------------------------------------
   laravel-production:
+    driver: bridge
   dokploy-network:
     driver: bridge
-
 volumes:
   postgres-data-production:
   laravel-storage-production:
