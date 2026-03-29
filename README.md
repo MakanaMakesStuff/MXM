@@ -43,6 +43,8 @@ The Docker configuration is housed entirely within the `dokploy/` directory to k
    ```bash
    npm run u:dev
    ```
+5. **Open the app in a browser**
+   <a href="http://localhost:8080" target="_blank">http://localhost:8080</a>
 
 ## 🧰 Docker Management Scripts
 
