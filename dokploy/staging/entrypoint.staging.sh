@@ -27,7 +27,7 @@ if [ ! -d "node_modules" ]; then
     npm install --silent
 fi
 
-# 🚨 THE FIX: Build the assets instead of running the dev server
+# Build the assets instead of running the dev server
 echo "Building Vite assets..."
 npm run build
 

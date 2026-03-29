@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
 	curl unzip libpq-dev libonig-dev libzip-dev \
 	&& docker-php-ext-install pdo_mysql pdo_pgsql mbstring zip
 
-# 4. Install Xdebug (Dev only)
+# 4. Install Xdebug (Dev/staging only)
 RUN pecl install xdebug && docker-php-ext-enable xdebug
 
 # 5. Install Composer
@@ -42,6 +42,6 @@ RUN mkdir -p /var/www/storage /var/www/bootstrap/cache && \
 
 # RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
-COPY --chmod=755 dokploy/entrypoint.dev.sh /usr/local/bin/entrypoint.sh
+COPY --chmod=755 dokploy/staging/entrypoint.staging.sh /usr/local/bin/entrypoint.sh
 
 ENTRYPOINT ["entrypoint.sh"]
