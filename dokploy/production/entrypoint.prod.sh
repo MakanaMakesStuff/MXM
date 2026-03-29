@@ -21,5 +21,11 @@ php artisan event:cache
 php artisan route:cache
 php artisan view:cache
 
+# ==========================================
+# START REVERB IN THE BACKGROUND
+# ==========================================
+echo "Starting Reverb WebSocket server..."
+php artisan reverb:start --host="0.0.0.0" --port="8080" &
+
 echo "Starting PHP-FPM..."
 exec php-fpm
