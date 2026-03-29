@@ -52,3 +52,8 @@ services:
         condition: service_healthy
 volumes:
   db_data:
+
+networks:
+  default:
+    name: dokploy-network
+    external: true
