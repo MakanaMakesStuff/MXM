@@ -1,0 +1,6 @@
+FROM nginx:stable-alpine
+COPY docker/nginx/default.conf /etc/nginx/conf.d/default.conf
+WORKDIR /var/www
+# We don't strictly need the PHP code here, but Nginx needs to "see" 
+# the static files in the /public folder to serve them.
+COPY --from=your-project-app /var/www/public ./public

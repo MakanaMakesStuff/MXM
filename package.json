@@ -10,7 +10,15 @@
         "format:check": "prettier --check resources/",
         "lint": "eslint . --fix",
         "lint:check": "eslint .",
-        "types:check": "tsc --noEmit"
+        "types:check": "tsc --noEmit",
+        "u:dev": "docker compose -f dokploy/compose-dev.yml up -d --build",
+        "u:prod": "docker compose -f dokploy/compose-prod.yml up -d --build",
+        "d:dev": "docker compose -f dokploy/compose-dev.yml down",
+        "d:prod": "docker compose -f dokploy/compose-prod.yml down",
+        "e:dev:app": "docker exec -it mxm-app-dev sh",
+        "e:dev:nginx": "docker exec -it mxm-nginx-dev sh",
+        "e:prod:app": "docker exec -it mxm-app-prod sh",
+        "e:prod:nginx": "docker exec -it mxm-nginx-prod sh"
     },
     "devDependencies": {
         "@eslint/js": "^9.19.0",

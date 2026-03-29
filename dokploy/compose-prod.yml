@@ -1,0 +1,23 @@
+services:
+  app:
+    container_name: mxm-app-prod
+    build:
+      context: ..
+      dockerfile: dokploy/Dockerfile.prod
+    args:
+      - USER_ID=${UID:-1000}
+      - GROUP_ID=${GID:-1000}
+    restart: always
+    environment:
+      - APP_ENV=production
+
+  nginx:
+    container_name: mxm-nginx-prod
+    build:
+      context: ..
+      dockerfile: dokploy/nginx/Dockerfile.prod
+    ports:
+      - "80:80" # Real traffic
+    restart: always
+    depends_on:
+      - app

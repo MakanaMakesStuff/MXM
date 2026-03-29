@@ -1,0 +1,50 @@
+# Stage 1: Build Frontend Assets
+FROM node:20 AS frontend
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+# Stage 2: Build PHP App
+FROM php:8.3-fpm
+
+# 1. Define ARGs with defaults
+ARG USER_ID=33
+ARG GROUP_ID=33
+ARG NODE_VERSION=20.x
+
+# 2. Synchronize the www-data user ONLY if not root and not already 33
+RUN if [ "${USER_ID}" -ne 33 ] && [ "${USER_ID}" -ne 0 ] && [ "${USER_ID}" -ne 1000 ]; then \
+	usermod -u ${USER_ID} www-data && \
+	groupmod -g ${GROUP_ID} www-data; \
+	fi
+
+# Install only required prod dependencies (No Xdebug)
+RUN apt-get update && apt-get install -y \
+	unzip libpq-dev libonig-dev libzip-dev \
+	&& docker-php-ext-install pdo_mysql pdo_pgsql mbstring zip \
+	&& apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+WORKDIR /var/www
+
+# Copy the actual application code into the image
+COPY . .
+
+# Copy the compiled frontend assets from Stage 1
+COPY --from=frontend /app/public/build ./public/build
+
+# Install PHP dependencies optimized for production
+RUN composer install --no-dev --optimize-autoloader --no-interaction
+
+# Fix permissions so the web server can read/write
+RUN if [ "${USER_ID}" -ne 33 ] && [ "${USER_ID}" -ne 0 ] && [ "${USER_ID}" -ne 1000 ]; then \
+	chown -R www-data:www-data /var/www; \
+	fi
+
+USER ${USER_ID}
+
+CMD ["php-fpm"]
