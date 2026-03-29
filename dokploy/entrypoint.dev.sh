@@ -11,6 +11,12 @@ fi
 echo "Running database migrations..."
 php artisan migrate --force
 
+# install npm dependencies if node_modules is missing
+if [ ! -d "node_modules" ]; then 
+	echo "Installing npm dependencies..."
+	npm install --silent
+fi
+
 # Start Vite in the background
 echo "Starting Vite..."
 npm run dev & 
