@@ -23,6 +23,23 @@ COPY . .
 # 3. Generate autoloader so Laravel can boot up
 RUN composer dump-autoload --optimize
 
+# ==========================================
+# 4. CATCH AND SET VITE ENVIRONMENT VARIABLES
+# ==========================================
+# Catch the arguments thrown by docker-compose.yml
+ARG VITE_REVERB_APP_KEY
+ARG VITE_REVERB_HOST
+ARG VITE_REVERB_PORT
+ARG VITE_REVERB_SCHEME
+ARG VITE_VAPID_PUBLIC_KEY
+
+# Convert them to ENV so Vite can read them during the build
+ENV VITE_REVERB_APP_KEY=$VITE_REVERB_APP_KEY
+ENV VITE_REVERB_HOST=$VITE_REVERB_HOST
+ENV VITE_REVERB_PORT=$VITE_REVERB_PORT
+ENV VITE_REVERB_SCHEME=$VITE_REVERB_SCHEME
+ENV VITE_VAPID_PUBLIC_KEY=$VITE_VAPID_PUBLIC_KEY
+
 # 4. Install Node dependencies and build assets
 # (Now Vite can successfully call `php artisan` during the build!)
 RUN npm ci

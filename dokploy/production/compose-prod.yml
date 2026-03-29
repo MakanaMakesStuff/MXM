@@ -6,6 +6,13 @@ services:
     build:
       context: ../../
       dockerfile: dokploy/production/Dockerfile.prod
+      args:
+        - VITE_REVERB_APP_KEY=${VITE_REVERB_APP_KEY}
+        - VITE_REVERB_HOST=${VITE_REVERB_HOST}
+        - VITE_REVERB_PORT=${VITE_REVERB_PORT}
+        - VITE_REVERB_SCHEME=${VITE_REVERB_SCHEME}
+        - VITE_APP_ENV=${VITE_APP_ENV}
+        - VITE_VAPID_PUBLIC_KEY=${VITE_VAPID_PUBLIC_KEY}
     volumes:
       - storage_data:/var/www/storage
       - public_assets:/var/www/shared_public
