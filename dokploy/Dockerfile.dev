@@ -38,9 +38,10 @@ RUN mkdir -p /var/www/storage /var/www/bootstrap/cache && \
 	fi
 
 # 8. Set the execution user dynamically
-USER ${USER_ID}
+# USER ${USER_ID}
 
-RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+# RUN chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
 COPY --chmod=755 dokploy/entrypoint.dev.sh /usr/local/bin/entrypoint.sh
+
 ENTRYPOINT ["entrypoint.sh"]
