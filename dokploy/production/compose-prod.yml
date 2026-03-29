@@ -25,7 +25,7 @@ services:
     # Note: Port 5432 is NOT exposed to the host for security. 
     # Only internal Docker networks can access it.
     volumes:
-      - db_data_prod:/var/lib/postgresql/data
+      - db_data_prod:/var/lib/postgresql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME} -d ${DB_DATABASE}"]
       interval: 10s
@@ -39,8 +39,6 @@ services:
     volumes:
       - public_assets:/var/www/public:ro
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
-    ports:
-      - "${APP_PORT:-80}:80"
     depends_on:
       - app
 
@@ -48,7 +46,7 @@ volumes:
   db_data_prod:
   storage_data:
   public_assets:
-  
+
 networks:
   default:
     name: dokploy-network
