@@ -44,17 +44,6 @@ The Docker configuration is housed entirely within the `dokploy/` directory to k
    npm run u:dev
    ```
 
-5. **Run migrations and generate keys:**
-   ```bash
-   npm run e:dev:app
-   # You are now inside the PHP container
-   php artisan key:generate
-   php artisan migrate
-   exit
-   ```
-
----
-
 ## 🧰 Docker Management Scripts
 
 To make managing the containers painless, this project includes custom NPM scripts. You don't need to type out long `docker compose` commands.
