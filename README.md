@@ -43,17 +43,8 @@ The Docker configuration is housed entirely within the `dokploy/` directory to k
    ```bash
    npm run u:dev
    ```
-
-5. **Run migrations and generate keys:**
-   ```bash
-   npm run e:dev:app
-   # You are now inside the PHP container
-   php artisan key:generate
-   php artisan migrate
-   exit
-   ```
-
----
+5. **Open the app in a browser**
+   <a href="http://localhost:8080" target="_blank">http://localhost:8080</a>
 
 ## 🧰 Docker Management Scripts
 
