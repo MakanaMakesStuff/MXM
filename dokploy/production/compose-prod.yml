@@ -4,7 +4,7 @@ services:
     env_file:
       - .env
     build:
-      context: ../..
+      context: ../../
       dockerfile: dokploy/production/Dockerfile.prod
       args:
         - USER_ID=${UID:-1000}
