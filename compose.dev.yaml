@@ -69,6 +69,7 @@ services:
       - ./:/var/www
     networks:
       - laravel-development
+      
 
   postgres:
     image: postgres:16
