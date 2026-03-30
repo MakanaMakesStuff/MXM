@@ -1,5 +1,6 @@
 import { createInertiaApp } from '@inertiajs/react';
 import { configureEcho } from '@laravel/echo-react';
+import axios from 'axios';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { initializeTheme } from '@/hooks/use-appearance';
 import AppLayout from '@/layouts/app-layout';
@@ -17,6 +18,7 @@ configureEcho({
     wssPort: import.meta.env.VITE_REVERB_PORT ?? 443,
     forceTLS: (import.meta.env.VITE_REVERB_SCHEME ?? 'https') === 'https',
     enabledTransports: ['ws', 'wss'],
+    client: axios,
 });
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
