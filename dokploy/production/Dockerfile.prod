@@ -53,7 +53,7 @@ FROM php:8.3-fpm
 # Install production system dependencies
 RUN apt-get update && apt-get install -y \
 	curl libpq-dev libonig-dev libzip-dev zip \
-	&& docker-php-ext-install pdo_mysql pdo_pgsql mbstring zip opcache \
+	&& docker-php-ext-install pdo_mysql pdo_pgsql mbstring zip opcache pcntl \
 	&& apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Enable and configure OPcache for performance
