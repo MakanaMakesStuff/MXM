@@ -187,17 +187,11 @@ export default function App({
             scrollBottomRef.current?.scrollIntoView({ behavior: 'auto' });
         }, 0);
 
-        const currentBody = data.body;
-
-        // Reset the input field immediately
-        reset('body');
-
         // Send to the server in the background
         post('/chat/messages', {
-            data: { body: currentBody },
             preserveScroll: true,
-            preserveState: true,
-        } as any);
+            onSuccess: () => reset('body'),
+        });
     };
 
     // Determine the partner's name for the UI
